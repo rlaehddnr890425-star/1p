@@ -1,0 +1,46 @@
+
+:root{--ink:#1a1a1a;--sub:#555;--line:#e6e6e6;--accent:#0f5132;--bg:#fafaf8}
+*{box-sizing:border-box}body{margin:0;font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;color:var(--ink);background:var(--bg);line-height:1.7}
+header{border-bottom:1px solid var(--line);background:#fff}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:800;font-size:20px;color:var(--accent);text-decoration:none}
+nav a{color:var(--sub);text-decoration:none;margin-left:18px;font-size:14px}
+main{padding:32px 20px;max-width:760px;margin:0 auto}
+h1{font-size:26px;line-height:1.4}h2{font-size:20px;margin-top:36px;border-bottom:2px solid var(--accent);padding-bottom:6px}
+.meta{color:#888;font-size:13px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:14px}
+.card a{color:var(--ink);text-decoration:none;font-weight:700;font-size:16px}
+.tag{display:inline-block;background:#e8f3ec;color:var(--accent);border-radius:999px;font-size:12px;padding:2px 10px;margin-right:6px}
+.notice{background:#fff8e1;border:1px solid #f0d98c;border-radius:8px;padding:12px 16px;font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:16px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left}th{background:#f2f6f3}
+footer{margin-top:60px;border-top:1px solid var(--line);padding:24px 20px;color:#888;font-size:13px;text-align:center}
+form input,form textarea{width:100%;padding:10px;margin:6px 0;border:1px solid var(--line);border-radius:6px;font:inherit}
+form button{background:var(--accent);color:#fff;border:0;padding:10px 22px;border-radius:6px;cursor:pointer}
+/* 광고 자리 (개발 중 placeholder — 애드센스 단위 연결 시 이 div 교체) */
+.ad-slot{border:1.5px dashed #c8c2b4;background:#f3f0e9;color:#8a8474;font-size:12.5px;
+  text-align:center;padding:18px 10px;margin:26px auto;border-radius:6px;max-width:720px;letter-spacing:.3px}
+.ad-slot.top{margin-top:8px;padding:12px}
+.ad-slot.inline{margin:30px auto}
+.ad-slot.bottom{margin-bottom:34px}
+.grid2{display:grid;grid-template-columns:1.6fr 1fr;gap:26px;align-items:start}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.side-box{border:1px solid var(--line);border-radius:8px;padding:18px;background:#fff}
+.side-box h3{margin:0 0 10px;font-size:15px}
+.side-box ul{margin:0;padding-left:18px}
+.side-box li{margin:6px 0;font-size:14px}
+/* 자가진단 */
+.q-card{border:1px solid var(--line);border-radius:8px;padding:18px 20px;margin:16px 0;background:#fff}
+.q-card legend{font-weight:700;font-size:15px;padding:0 6px}
+.q-card label{display:block;margin:8px 0;font-size:14.5px;cursor:pointer}
+.q-card input[type=number],.q-card select{width:100%;max-width:280px;padding:8px;border:1px solid #bbb;border-radius:6px;font-size:15px}
+.btn{display:inline-block;background:var(--accent);color:#fff;border:none;padding:12px 22px;border-radius:8px;font-size:15px;cursor:pointer}
+.btn:hover{background:#0c4429}
+#result .fund{border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:6px;padding:14px 16px;margin:12px 0;background:#fff}
+#result .fund.maybe{border-left-color:#c9a227}
+#result .fund.no{border-left-color:#b04a3f;background:#fdf6f5}
+#result .fund h4{margin:0 0 6px;font-size:15.5px}
+#result .meta{font-size:13px;color:#666;margin-top:8px}
+.tag{display:inline-block;font-size:12px;background:#e8f2ec;color:var(--accent);border-radius:99px;padding:2px 10px;margin:2px 4px 0 0}
+.tag.warn{background:#f6e8c1;color:#6b5307}.tag.bad{background:#f3d9d4;color:#8c2f22}

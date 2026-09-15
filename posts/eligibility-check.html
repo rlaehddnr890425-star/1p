@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>정책자금 자격 자가진단 — 7문항 30초 | 자금레이더</title>
+<meta name="description" content="업력·매출·신용·업종 7문항으로 소진공 직접대출·창업자금·재도전지원금·지역신보 보증부대출 후보를 한 번에 진단하는 무료 도구. 입력값은 브라우저에서만 처리됩니다.">
+<link rel="stylesheet" href="../style.css"></head>
+<body>
+<header><div class="wrap"><a class="logo" href="../index.html">자금레이더</a>
+<nav><a href="../index.html">홈</a><a href="../index.html">글 목록</a><a href="../about.html">소개</a><a href="../contact.html">광고·문의</a></nav></div></header>
+<main>
+<div class="grid2">
+<div>
+<h1>정책자금 자격 자가진단</h1>
+<p class="meta">7문항 · 30초 · 결과 즉시 · <b>입력값은 서버로 전송되지 않고 이 브라우저 안에서만 계산됩니다.</b></p>
+
+<div class="ad-slot top">광고 자리 (미설치) — 애드센스 연결 시 이 구간에 디스플레이 반응형 단위가 들어갑니다</div>
+
+<form id="quiz" onsubmit="event.preventDefault();check()">
+
+<fieldset class="q-card"><legend>1. 사업자 현재 상태</legend>
+<label><input type="radio" name="status" value="run" checked> 사업 운영 중 (사업자등록 보유)</label>
+<label><input type="radio" name="status" value="pre"> 예비창업 (사업자 등록 전)</label>
+<label><input type="radio" name="status" value="closed"> 폐업했거나 폐업 예정 (재기·폐업지원)</label>
+</fieldset>
+
+<fieldset class="q-card"><legend>2. 업력 (사업자등록 기준)</legend>
+<select id="years" name="years">
+<option value="0">선택하세요</option>
+<option value="0.5">1년 미만</option>
+<option value="2">1~3년</option>
+<option value="5">3년 이상</option>
+</select>
+</fieldset>
+
+<fieldset class="q-card"><legend>3. 최근 1년 매출 (또는 예상)</legend>
+<select id="revenue" name="revenue">
+<option value="-1">선택하세요</option>
+<option value="1">없음 또는 8천만원 이하</option>
+<option value="2">8천만원 ~ 2억원</option>
+<option value="5">2억 ~ 10억원</option>
+<option value="11">10억원 초과</option>
+</select>
+</fieldset>
+
+<fieldset class="q-card"><legend>4. 신용 상태</legend>
+<select id="credit" name="credit">
+<option value="">선택하세요</option>
+<option value="ok">양호 — 연체 없음, 카드·대출 정상 이용</option>
+<option value="mid">보통 — 연체는 없으나 신용점수가 낮음 / 대출 거절 경험</option>
+<option value="bad">불량 — 연체·대위변제·법적 채무불이행 기록 있음</option>
+</select>
+</fieldset>
+
+<fieldset class="q-card"><legend>5. 업종</legend>
+<select id="industry" name="industry">
+<option value="">선택하세요</option>
+<option value="ok">일반 업종 (요식·도소매·제조·서비스·숙박 등)</option>
+<option value="ban">휴업·폐업 예정 업종, 유흥·사치향락·투기적 부동산 등 정책자금 제한 업종</option>
+<option value="uncertain">우리 업종이 제한인지 모르겠음</option>
+</select>
+</fieldset>
+
+<fieldset class="q-card"><legend>6. 대출 용도</legend>
+<select id="purpose" name="purpose">
+<option value="">선택하세요</option>
+<option value="ops">운영자금 (재료비·인건비·경영안정)</option>
+<option value="facility">시설·장비·인테리어 투자</option>
+<option value="replace">높은 이자 사업자대출 갈아타기 (대환)</option>
+<option value="start">창업 자금</option>
+<option value="close">폐업 정리·철거·배우자 취업 지원</option>
+</select>
+</fieldset>
+
+<fieldset class="q-card"><legend>7. 해당 사항 (복수 선택 가능)</legend>
+<label><input type="checkbox" name="extra" value="young"> 39세 이하 청년 소상공인</label>
+<label><input type="checkbox" name="extra" value="woman"> 여성 가장·한부모 등 취약계층</label>
+<label><input type="checkbox" name="extra" value="eco"> 사회적기업·예비사회적기업·협동조합</label>
+<label><input type="checkbox" name="extra" value="disaster"> 재해·감염병 등 경영위기 피해 사업자</label>
+<label><input type="checkbox" name="extra" value="faithful"> 정책금융(신보·소진공) 대출 12개월 이상 성실상환 중</label>
+</fieldset>
+
+<button class="btn" type="submit">결과 보기</button>
+</form>
+
+<div id="result"></div>
+
+<div class="ad-slot inline">광고 자리 (본문 하단 인라인) — 전환율이 가장 높은 구간으로 평가됩니다</div>
+
+<h2>이 진단의 원리</h2>
+<p>소상공인정책자금(소진공 직접대출)과 지역신용보증재단 보증부대출의 공고문 공통 4대 요건 — ① 사업 상태·업력 ② 매출 규모 ③ 신용 상태 ④ 업종 제한 — 을 체크리스트화한 것입니다. 같은 요건이라도 자금별로 우선순위가 달라지는데, 창업자금·청년·재도전 등 "타깃 소상공인"에 해당할수록 후보가 늘어나도록 설계했습니다.</p>
+<p>핵심 분기점은 <b>신용 상태</b>입니다. 신용이 양호하면 소진공 직접대출이 주 경로이고, 신용이 약한 축이면 같은 은행 대출이라도 지역신용보증재단의 보증서를 끼고 가는 보증부대출이 주 경로가 됩니다. 두 경로는 신청 사이트도, 상담 창구도 완전히 다르므로 <a href="jeoldae-vs-bojeung.html">직접대출과 보증부대출의 차이</a>를 먼저 읽으시는 걸 권합니다.</p>
+
+<h2>진단 후 다음 3단계</h2>
+<ol>
+<li><b>증명서류 2종 미리 발급</b> — 사업자등록증명·부가가치세과세표준증명 (홈택스 5분). 어떤 자금을 가도 필수입니다.</li>
+<li><b>공고 원문 확인</b> — <a href="https://ols.semas.or.kr" rel="noopener">소상공인정책자금(ols.semas.or.kr)</a> 공지사항에서 현재 접수 중인 공고의 마감일·예산 잔량을 확인하세요. 직접대출은 예산 소진형이라 월 초 공고를 놓치면 다음 달까지 기다려야 합니다.</li>
+<li><b>지역 신보 문의</b> — 보증부 후보가 떴다면 사업자등록지 관할 지역신용보증재단. 지점 방문이 어려우면 대부분 모바일 guarantee 신청 앱을 운영 중입니다.</li>
+</ol>
+
+<div class="notice">본 도구는 공개 공고문의 일반 요건을 요약한 자가진단이며, 신청 자격·한도·금리를 보증하지 않습니다. 실제 요건은 신청 시점의 공식 공고문이 우선하며, 제한 업종 판정·우대 요건은 세부 기준이복잡합니다.</div>
+</div>
+
+<div class="side-box">
+<h3>자주 함께 보는 글</h3>
+<ul>
+<li><a href="2026-09-janjeongjaegum.html">9월 일반경영안정자금 접수 개시</a></li>
+<li><a href="jeoldae-vs-bojeung.html">직접대출 vs 보증부, 어디로 갈까</a></li>
+</ul>
+<div class="ad-slot inline">광고 자리 (사이드)</div>
+<h3>업데이트 알림</h3>
+<p style="font-size:14px;margin:0">신규 공고는 블로그 글로 올라옵니다. <a href="../contact.html">문의 메일</a>로 소식 요청을 남기면 우선 안내합니다.</p>
+</div>
+</div>
+</main>
+<footer>© 2026 자금레이더 · <a href="../about.html">소개</a> · <a href="../privacy.html">개인정보처리방침</a> · <a href="../terms.html">이용약관</a><br>본 사이트는 소상공인 정책자금·공공조달 정보를 정리하는 민간 블로그이며 정부기관과 무관합니다.</footer>
+<script>
+const FUNDS={
+ direct:{n:'일반경영안정자금 (소진공 직접대출)',d:'소상공인시장진흥공단이 은행을 거치지 않고 직접 빌려주는 표준 운영자금. 연 2~4%대 고정금리, 5년 분할상환 구조가 기본.',u:'https://ols.semas.or.kr',t:'good'},
+ start:{n:'창업자금 (직접대출)',d:'개업 후 3년 이내(예비창업 포함) 전용. 일반 자금보다 낮은 우대금리 구간이 있으며 사업비·운전자금 겸용.',u:'https://ols.semas.or.kr',t:'good'},
+ replace:{n:'대환자금 (고금리→저금리 갈아타기)',d:'연 4~5%대 이하로 갈아타게 해주는 정책 대환. 민간 사업자대출·카드론 이용 중 저신용·고금리 차주 대상 상품이 상시~수시 공고로 나옵니다.',u:'https://www.kofsq.go.kr',t:'good'},
+ sinbo:{n:'지역신용보증재단 보증부대출',d:'보증서가 없어 은행에서 거절된 사업자가 보증서를 발급받아 시중은행에서 대출받는 구조. 신용이 약할수록 오히려 주된 경로가 됩니다.',u:'https://www.koregion.org',t:'good'},
+ retry:{n:'재도전지원자금',d:'폐업 후 재기하거나 재창업하는 소상공인 대상. 재기지원교육 이수 등 선행 요건이 있어 폐업 예정 단계부터 준비해야 합니다.',u:'https://ols.semas.or.kr',t:'mid'},
+ hope:{n:'희망리턴패키지 (폐업·재기 지원)',d:'차입금 1억원 이하 폐업(예정) 소상공인 대상. 경영컨설팅, 철거비 최대 600만원, 재창업·취업 연계. 대출이 아니라 지원금·서비스 패키지인 점이 특징.',u:'http://www.hope.return.go.kr',t:'mid'},
+ voucher:{n:'경영안정바우처 등 소액 직접지원',d:'연 매출 3천만원 이하 영세사업자 대상 25만원 상당 바우처 등 비대출 지원. 자격이 낮을수록 오히려 유리한 축.',u:'https://sbb.or.kr',t:'mid'},
+ social:{n:'사회적경제기업 전용 자금·우대',d:'사회적기업·협동조합 전용 배정분과 인증 가점. 일반 공고와 별개로 소수 정기공고로 접수됩니다.',u:'https://ols.semas.or.kr',t:'mid'},
+ ban:{n:'직접대출 제한 가능성 확인 필요',d:'휴·폐업 예정, 유흥·향락, 투기적 부동산업 등은 직접대출에서 제외되거나 제한됩니다. 다만 업종 세부는 예외가 많아 공고문 별표와 상담으로 최종 판단하세요.',u:'https://ols.semas.or.kr',t:'bad'}
+};
+function tag(t){return t==='good'?'<span class="tag">유력 후보</span>':t==='mid'?'<span class="tag warn">조건부 후보</span>':'<span class="tag bad">제한 확인 필요</span>';}
+function check(){
+ const f=(id)=>document.getElementById(id);
+ const status=document.querySelector('input[name=status]:checked').value;
+ const y=+f('years').value, r=+f('revenue').value, c=f('credit').value, ind=f('industry').value, p=f('purpose').value;
+ const ex=[...document.querySelectorAll('input[name=extra]:checked')].map(e=>e.value);
+ if(isNaN(r)||!c||!ind||!p){alert('모든 문항을 선택해주세요.');return;}
+ let hits=[],notes=[];
+ if(status==='closed'){
+   if(p==='close') hits.push('hope','voucher'); else hits.push('hope','retry');
+   if(p==='start') hits.push('retry');
+ } else if(ind==='ban'){
+   hits.push('ban');
+   if(ex.includes('eco')) hits.push('social');
+   notes.push('제한 업종이라도 지역재단·지자체 자체 자금이나 버팀목 외 창구는 남는 경우가 있습니다. 업종 코드(표준산업분류 5단위) 기준으로 상담받아 보세요.');
+ } else {
+   if(c!=='bad'&&r<=10&&y>=0.5) hits.push('direct');
+   if((status==='pre'||y<3)&&(p==='start'||p==='ops')&&c!=='bad') hits.push('start');
+   if(p==='replace'&&c!=='ok') hits.push('replace');
+   if(p==='replace'&&c==='ok') {hits.push('replace');notes.push('신용 양호자도 대상이 되는 대환상품(저금리 갈아타기)이 있습니다. 이용 중인 대출의 금리증명서류가 핵심입니다.');}
+   if(c!=='ok') hits.push('sinbo');
+   if(c==='ok'&&r<=2&&p!=='replace') hits.push('sinbo');
+   if(p==='close') hits.push('hope');
+   if(ex.includes('faithful')&&c!=='bad') notes.push('성실상환 이력은 신보 감점 면제·우대보증과 소진공 성공불융자·재도전 계열에서 그대로 가점이 됩니다. 조회 서류(상환이력증명)를 떼두세요.');
+   if(ex.includes('eco')) hits.push('social');
+   if(r<=0.8) hits.push('voucher');
+   if(ex.includes('young')) notes.push('청년(39세 이하) 전용 배정·우대금리가 여러 공고에 별도 슬롯으로 존재합니다. 공고 볼 때 청년 전용 칸을 먼저 체크.');
+   if(ex.includes('woman')) notes.push('여성가장·취약계층 확인서(발급 기관 상이)가 있으면 우대금리·우선순위 대상이 되는 공고가 많습니다.');
+   if(ex.includes('disaster')) notes.push('재해 피해 확인서는 발급 즉시 유효 — 지자체 확인서를 먼저 떼면 특별자금 슬롯에 바로 지원 가능합니다.');
+ }
+ if(ind==='uncertain') notes.push('업종 제한 여부가 불확실하면 표준산업분류 업종코드로 상담 문의가 가장 정확합니다. (부동산임대·유흥주점·무도장업 등이 대표적 제한)');
+ let out='<h2>진단 결과</h2>';
+ const uniq=[...new Set(hits)];
+ if(!uniq.length) out+='<p>현재 입력 기준으로 유력 후보가 약합니다. 다만 업력·매출 요건이 다른 <b>시·군·구 자체 소규모 자금</b>과 카드론 대체 상품이 남으므로 지역 신용재단 창구는 열어두세요.</p>';
+ uniq.forEach(k=>{const x=FUNDS[k];out+=`<div class="fund ${x.t==='good'?'':x.t}"><h4>${tag(x.t)} ${x.n}</h4><p style="margin:6px 0">${x.d}</p><p class="meta">신청 창구: <a href="${x.u}" rel="noopener">${x.u.replace(/^https?:\/\//,'')}</a></p></div>`;});
+ if(notes.length) out+='<h2>추가 확인 포인트</h2><ul>'+notes.map(n=>'<li>'+n+'</li>').join('')+'</ul>';
+ out+='<h2>다음 3단계</h2><ol><li>홈택스에서 사업자등록증명·부가가치세과세표준증명 발급</li><li><a href="https://ols.semas.or.kr">ols.semas.or.kr</a> 공지사항에서 접수 중 공고·마감일 확인</li><li>보증부 후보가 있으면 관할 지역신용보증재단 문의</li></ol>';
+ document.getElementById('result').innerHTML=out;
+ document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body></html>
