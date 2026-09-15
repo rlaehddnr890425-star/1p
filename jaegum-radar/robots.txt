@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rlaehddnr890425-star.github.io/1p/sitemap.xml
