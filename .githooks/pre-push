@@ -1,0 +1,2 @@
+#!/bin/sh
+python3 "$(git rev-parse --show-toplevel)/_build/pii_check.py" || { echo "PII GATE: 개인정보 발견 — push 중단"; exit 1; }
