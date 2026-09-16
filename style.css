@@ -44,3 +44,45 @@ form button{background:var(--accent);color:#fff;border:0;padding:10px 22px;borde
 #result .meta{font-size:13px;color:#666;margin-top:8px}
 .tag{display:inline-block;font-size:12px;background:#e8f2ec;color:var(--accent);border-radius:99px;padding:2px 10px;margin:2px 4px 0 0}
 .tag.warn{background:#f6e8c1;color:#6b5307}.tag.bad{background:#f3d9d4;color:#8c2f22}
+
+/* Phase 2a — 홈 대시보드 (body.home 만 1140px, 기사 본문은 기존 760px 유지) */
+.hwrap{max-width:1140px}
+body.home main{max-width:1140px;padding:0 20px}
+body.home header .hrow{display:flex;align-items:center;justify-content:space-between;height:64px}
+.hero{padding:44px 0 30px;border-bottom:1px solid var(--line)}
+.hero h1{font-size:32px;margin:0 0 12px;border:0;line-height:1.35}
+.hero .sub{font-size:16px;color:var(--sub);max-width:640px;margin:0 0 14px}
+.stamp{font-size:13.5px;color:#555;background:#eef4f0;border-radius:8px;padding:8px 14px;display:inline-block}
+.cta{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+.btn.ghost{background:#fff;color:var(--accent);border:1.5px solid var(--accent)}
+.btn.sm{padding:7px 14px;font-size:13.5px}
+section{padding:34px 0 6px}
+section>h2{margin-top:0}
+.dim{color:var(--sub)}.small{font-size:13px}
+code{background:#f1efe9;border-radius:4px;padding:1px 5px;font-size:12.5px}
+.ncards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;margin-top:14px}
+.ncard{background:#fff;border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column}
+.nhead{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.st{background:#0f5132;color:#fff;font-size:12px;border-radius:999px;padding:3px 10px}
+.cat{font-size:12px;color:var(--sub)}
+.ncard h3{margin:0 0 10px;font-size:16.5px;line-height:1.4}
+.ncard dl{margin:0;display:grid;gap:5px}
+.ncard dl>div{display:grid;grid-template-columns:52px 1fr;gap:8px;font-size:13.8px}
+.ncard dt{color:#777}
+.ncard dd{margin:0}
+.nfoot{margin-top:12px;display:flex;gap:10px;align-items:center}
+.ghost{color:var(--accent);font-size:13.5px;text-decoration:none;font-weight:600}
+.vstamp{margin:10px 0 0;font-size:11.5px;color:#888;border-top:1px dashed var(--line);padding-top:8px}
+.tscroll{overflow-x:auto}
+.tscroll table{min-width:640px}
+.chan{display:inline-block;font-size:11px;border-radius:4px;padding:1px 6px;margin-left:6px;vertical-align:middle}
+.chan.d{background:#e8f3ec;color:var(--accent)}.chan.a{background:#f1efe9;color:#7a6c4f}
+.num{white-space:nowrap}
+.tcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.tool{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;text-decoration:none;color:var(--ink)}
+.tool b{display:block;font-size:15.5px;margin-bottom:6px;color:var(--accent)}
+.tool span{font-size:13.5px;color:var(--sub)}
+.tool.soon{opacity:.55;border-style:dashed}
+.principles ul{margin:12px 0 20px;padding-left:20px;font-size:14.5px}
+.postlist{margin:12px 0;padding-left:20px}.postlist li{margin:8px 0;font-size:15px}
+@media(max-width:760px){.hero h1{font-size:24px}}

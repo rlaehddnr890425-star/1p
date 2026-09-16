@@ -1,0 +1,51 @@
+{
+  "updated_at": "2026-09-16 09:10",
+  "source_note": "수치는 SOURCES_policyfund_2026-09-16.md(소진공 원문 복제본) 기준으로만 채운다. verified_at 없는 항목은 홈에 표시하지 않는다.",
+  "funds": [
+    {
+      "id": "yongji-2026q4-cheongnyeon",
+      "category": "정책자금",
+      "channel": "대리대출",
+      "title": "2026년 4분기 청년고용연계자금 접수",
+      "status": "접수중",
+      "who": "업력 3년 미만 청년(만 39 이하) / 청년 근로자 과반 / 최근 1년 청년 1명 이상 고용 유지",
+      "amount": "7,000만 원",
+      "rate": "3.85% (기준 3.85 + 0.0)",
+      "term": "5년 (거치 2년)",
+      "method": "분기 공고 · 예산 소진 시 마감",
+      "apply": "https://ols.semas.or.kr",
+      "source": "2026-09-11 소진공 공지 · 정책자금 안내(www.semas.or.kr)",
+      "verified_at": "2026-09-16 09:10"
+    },
+    {
+      "id": "yongji-2026q4-disability",
+      "category": "정책자금",
+      "channel": "대리대출",
+      "title": "2026년 4분기 장애인기업지원자금 접수",
+      "status": "접수중",
+      "who": "장애인복지카드·국가유공자 카드·장애인기업확인서 소지",
+      "amount": "1억 원",
+      "rate": "고정 2.00%",
+      "term": "7년 (거치 2년)",
+      "method": "분기 공고 · 예산 소진 시 마감",
+      "apply": "https://ols.semas.or.kr",
+      "source": "2026-09-11 소진공 공지 · 정책자금 안내(www.semas.or.kr)",
+      "verified_at": "2026-09-16 09:10"
+    },
+    {
+      "id": "yongji-2026q4-emergency",
+      "category": "정책자금",
+      "channel": "대리대출",
+      "title": "2026년 4분기 긴급경영안정(일시적경영애로) 접수",
+      "status": "접수중",
+      "who": "지역경제 위기 지역·감염병 등 영업 피해 소상공인",
+      "amount": "7,000만 원",
+      "rate": "3.85% (기준 3.85 + 0.0)",
+      "term": "5년 (거치 2년)",
+      "method": "분기 공고 · 예산 소진 시 마감",
+      "apply": "https://ols.semas.or.kr",
+      "source": "2026-09-11 소진공 공지 · 정책자금 안내(www.semas.or.kr)",
+      "verified_at": "2026-09-16 09:10"
+    }
+  ]
+}
