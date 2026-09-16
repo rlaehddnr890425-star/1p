@@ -1,21 +1,142 @@
 {
-  "updated_at": "2026-09-16 09:10",
-  "source": "소진공 정책자금 안내·한눈에보기 (SOURCES_policyfund_2026-09-16.md 원문 복제본)",
-  "base_rate": {"value": "3.85%", "applied": "2026-07-10", "note": "분기별 변동"},
-  "common_who": "상시근로자 5인 미만 (제조·건설·운수·광업 10인 미만)",
-  "funds": [
-    {"name": "혁신성장촉진", "channel": "직접", "who": "수출·2년 연속 매출 10% 신장·스마트공장 등 11개 요건 중 1", "amount": "1억~10억 (유형별)", "rate": "4.25%", "term": "운전 5년 / 시설 8년", "guide": "posts/policy-fund-map.html"},
-    {"name": "민간투자연계형 매칭융자", "channel": "직접", "who": "주관기관 투자 + 선투자 추천서", "amount": "5억", "rate": "4.25%", "term": "8년", "guide": "posts/policy-fund-map.html"},
-    {"name": "상생성장지원", "channel": "직접", "who": "TOPS·OPS 선정, 상생협약 플랫폼 입점", "amount": "7천만~12억 (형별)", "rate": "4.25%", "term": "운전 5년 / 시설 8년", "guide": "posts/policy-fund-map.html"},
-    {"name": "일시적경영애로", "channel": "직접", "who": "연매출 1억 4백만 미만 + 업력 7년 미만 + 애로 사유", "amount": "7,000만", "rate": "3.85%", "term": "5년 (거치 2년)", "guide": "posts/policy-fund-map.html"},
-    {"name": "신용취약소상공인", "channel": "직접", "who": "신용관리 교육 이수 + NCB 839점 이하", "amount": "3,000만", "rate": "5.45%", "term": "5년 (거치 2년)", "guide": "posts/policy-fund-map.html"},
-    {"name": "재도전특별", "channel": "직접", "who": "재창업 교육 수료·채무조정 성실상환 등 유형별", "amount": "7천만~2억 (형별)", "rate": "4.25~5.45%", "term": "5년 (거치 2년)", "guide": "posts/policy-fund-map.html"},
-    {"name": "소공인특화", "channel": "대리", "who": "제조업, 상시근로자 10인 미만", "amount": "운전 1억 / 시설 5억", "rate": "4.45%", "term": "운전 5년 / 시설 8년", "guide": "posts/policy-fund-map.html"},
-    {"name": "일반경영안정", "channel": "대리", "who": "업력 무관 소상공인", "amount": "7,000만", "rate": "4.45%", "term": "5년 (거치 2년)", "guide": "posts/policy-fund-map.html"},
-    {"name": "긴급경영안정(재해)", "channel": "대리", "who": "지자체 재해확인증 소지", "amount": "1억", "rate": "고정 2.00%", "term": "5년 (거치 2년)", "guide": "posts/policy-fund-map.html"},
-    {"name": "긴급경영안정(일시적)", "channel": "대리", "who": "지역경제 위기·감염병 피해", "amount": "7,000만", "rate": "3.85%", "term": "5년 (거치 2년)", "guide": "posts/policy-fund-map.html"},
-    {"name": "장애인기업지원", "channel": "대리", "who": "장애인복지카드·장애인기업확인서", "amount": "1억", "rate": "고정 2.00%", "term": "7년 (거치 2년)", "guide": "posts/policy-fund-map.html"},
-    {"name": "청년고용연계", "channel": "대리", "who": "업력 3년 미만 청년 경영 + 청년 고용·과반", "amount": "7,000만", "rate": "3.85%", "term": "5년 (거치 2년)", "guide": "posts/policy-fund-map.html"},
-    {"name": "대환대출", "channel": "대리", "who": "중저신용 소상공인의 고금리 사업자대출 애로", "amount": "5,000만", "rate": "고정 4.50%", "term": "10년", "guide": "posts/policy-fund-map.html"}
-  ]
+ "updated_at": "2026-09-16 09:10",
+ "source": "소진공 정책자금 안내·한눈에보기 (SOURCES_policyfund_2026-09-16.md 원문 복제본)",
+ "base_rate": {
+  "value": "3.85%",
+  "applied": "2026-07-10",
+  "note": "분기별 변동"
+ },
+ "common_who": "상시근로자 5인 미만 (제조·건설·운수·광업 10인 미만)",
+ "funds": [
+  {
+   "name": "혁신성장촉진",
+   "channel": "직접",
+   "who": "수출·2년 연속 매출 10% 신장·스마트공장 등 11개 요건 중 1",
+   "amount": "1억~10억 (유형별)",
+   "rate": "4.25%",
+   "term": "운전 5년 / 시설 8년",
+   "guide": "posts/policy-fund-map.html",
+   "apply": "https://ols.semas.or.kr/ols/pfa/SPFA301M/page.do"
+  },
+  {
+   "name": "민간투자연계형 매칭융자",
+   "channel": "직접",
+   "who": "주관기관 투자 + 선투자 추천서",
+   "amount": "5억",
+   "rate": "4.25%",
+   "term": "8년",
+   "guide": "posts/policy-fund-map.html",
+   "apply": "https://ols.semas.or.kr/ols/pfa/SPFA301M/page.do"
+  },
+  {
+   "name": "상생성장지원",
+   "channel": "직접",
+   "who": "TOPS·OPS 선정, 상생협약 플랫폼 입점",
+   "amount": "7천만~12억 (형별)",
+   "rate": "4.25%",
+   "term": "운전 5년 / 시설 8년",
+   "guide": "posts/policy-fund-map.html",
+   "apply": "https://ols.semas.or.kr/ols/pfa/SPFA301M/page.do"
+  },
+  {
+   "name": "일시적경영애로",
+   "channel": "직접",
+   "who": "연매출 1억 4백만 미만 + 업력 7년 미만 + 애로 사유",
+   "amount": "7,000만",
+   "rate": "3.85%",
+   "term": "5년 (거치 2년)",
+   "guide": "posts/policy-fund-map.html",
+   "apply": "https://ols.semas.or.kr/ols/pfa/SPFA301M/page.do"
+  },
+  {
+   "name": "신용취약소상공인",
+   "channel": "직접",
+   "who": "신용관리 교육 이수 + NCB 839점 이하",
+   "amount": "3,000만",
+   "rate": "5.45%",
+   "term": "5년 (거치 2년)",
+   "guide": "posts/policy-fund-map.html",
+   "apply": "https://ols.semas.or.kr/ols/pfa/SPFA301M/page.do"
+  },
+  {
+   "name": "재도전특별",
+   "channel": "직접",
+   "who": "재창업 교육 수료·채무조정 성실상환 등 유형별",
+   "amount": "7천만~2억 (형별)",
+   "rate": "4.25~5.45%",
+   "term": "5년 (거치 2년)",
+   "guide": "posts/policy-fund-map.html",
+   "apply": "https://ols.semas.or.kr/ols/pfa/SPFA301M/page.do"
+  },
+  {
+   "name": "소공인특화",
+   "channel": "대리",
+   "who": "제조업, 상시근로자 10인 미만",
+   "amount": "운전 1억 / 시설 5억",
+   "rate": "4.45%",
+   "term": "운전 5년 / 시설 8년",
+   "guide": "posts/policy-fund-map.html",
+   "apply": "https://ols.semas.or.kr/ols/pfa/SPFA201M/page.do"
+  },
+  {
+   "name": "일반경영안정",
+   "channel": "대리",
+   "who": "업력 무관 소상공인",
+   "amount": "7,000만",
+   "rate": "4.45%",
+   "term": "5년 (거치 2년)",
+   "guide": "posts/policy-fund-map.html",
+   "apply": "https://ols.semas.or.kr/ols/pfa/SPFA201M/page.do"
+  },
+  {
+   "name": "긴급경영안정(재해)",
+   "channel": "대리",
+   "who": "지자체 재해확인증 소지",
+   "amount": "1억",
+   "rate": "고정 2.00%",
+   "term": "5년 (거치 2년)",
+   "guide": "posts/policy-fund-map.html",
+   "apply": "https://ols.semas.or.kr/ols/pfa/SPFA201M/page.do"
+  },
+  {
+   "name": "긴급경영안정(일시적)",
+   "channel": "대리",
+   "who": "지역경제 위기·감염병 피해",
+   "amount": "7,000만",
+   "rate": "3.85%",
+   "term": "5년 (거치 2년)",
+   "guide": "posts/policy-fund-map.html",
+   "apply": "https://ols.semas.or.kr/ols/pfa/SPFA201M/page.do"
+  },
+  {
+   "name": "장애인기업지원",
+   "channel": "대리",
+   "who": "장애인복지카드·장애인기업확인서",
+   "amount": "1억",
+   "rate": "고정 2.00%",
+   "term": "7년 (거치 2년)",
+   "guide": "posts/policy-fund-map.html",
+   "apply": "https://ols.semas.or.kr/ols/pfa/SPFA201M/page.do"
+  },
+  {
+   "name": "청년고용연계",
+   "channel": "대리",
+   "who": "업력 3년 미만 청년 경영 + 청년 고용·과반",
+   "amount": "7,000만",
+   "rate": "3.85%",
+   "term": "5년 (거치 2년)",
+   "guide": "posts/policy-fund-map.html",
+   "apply": "https://ols.semas.or.kr/ols/pfa/SPFA201M/page.do"
+  },
+  {
+   "name": "대환대출",
+   "channel": "대리",
+   "who": "중저신용 소상공인의 고금리 사업자대출 애로",
+   "amount": "5,000만",
+   "rate": "고정 4.50%",
+   "term": "10년",
+   "guide": "posts/policy-fund-map.html",
+   "apply": "https://ols.semas.or.kr/ols/pfa/SPFA201M/page.do"
+  }
+ ]
 }

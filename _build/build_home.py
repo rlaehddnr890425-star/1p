@@ -11,7 +11,7 @@ FUNDS = json.loads((ROOT / 'data' / 'funds.json').read_text())
 NOTICES = json.loads((ROOT / 'data' / 'notices.json').read_text())
 
 STAMP_KEYS = ('verified_at', 'source', 'apply', 'status', 'who', 'amount', 'rate', 'term', 'method', 'title', 'category', 'channel')
-FUND_KEYS = ('name', 'channel', 'who', 'amount', 'rate', 'term', 'guide')
+FUND_KEYS = ('name', 'channel', 'who', 'amount', 'rate', 'term', 'apply', 'guide')
 
 def validate():
     errs = []
@@ -45,8 +45,10 @@ def fund_rows():
     out = []
     for f in FUNDS['funds']:
         cls = 'd' if f['channel'] == '직접' else 'a'
-        out.append('<tr><td><b>' + f['name'] + '</b><span class="chan ' + cls + '">' + f['channel']
-            + '</span></td><td class="dim">' + f['who'] + '</td><td>' + f['amount']
+        cell = '<a href="' + f['guide'] + '"><b>' + f['name'] + '</b></a>'\
+            + '<span class="chan ' + cls + '">' + f['channel'] + '</span>'\
+            + ' <a class="mini" href="' + f['apply'] + '" rel="nofollow">신청↗</a>'
+        out.append('<tr><td>' + cell + '</td><td class="dim">' + f['who'] + '</td><td>' + f['amount']
             + '</td><td class="num">' + f['rate'] + '</td><td class="dim">' + f['term'] + '</td></tr>')
     return chr(10).join(out)
 
