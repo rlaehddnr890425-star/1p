@@ -42,6 +42,7 @@
 <div id="bnoOut" style="margin-top:10px"></div>
 </div>
 
+<h2 id="quiz-anchor" style="margin-top:26px">7문항 정밀 진단</h2>
 <form id="quiz" onsubmit="event.preventDefault();check()">
 
 <fieldset class="q-card"><legend>1. 사업자 현재 상태</legend>
@@ -177,7 +178,7 @@ function tag(t){return t==='good'?'<span class="tag">유력 후보</span>':t==='
    var tips=[];
    if(it.b_stt_cd==='03') tips.push('폐업 상태라면 정책자금 직접대출은 원칙적으로 제외 — <b>희망리턴패키지·재도전지원자금</b>이 먼저입니다. 아래 1번 문항을 "폐업"으로 고르세요.');
    else if(it.b_stt_cd==='02') tips.push('휴업 상태도 서류상 살아있다면 자금이 열리는 경우가 많습니다. 휴업 사유·기간을 정리해 두세요.');
-   else tips.push('정상 번호 확인 완료 — 아래 7문항에서 매출·신용·용도만 고르면 후보 자금이 좁혀집니다.');
+   else tips.push('정상 번호 확인 완료 — 아래 7문항에서 매출·신용·용도만 고르면 후보 자금이 좁혀집니다. 사업자 상태·과세유형은 국세청 원문(<a href="https://www.hometax.go.kr" rel="noopener nofollow">홈택스</a>)에서도 대조할 수 있습니다.');
    box.innerHTML=h+'<ul style="margin:8px 0 0 18px;padding:0;font-size:14px">'+tips.map(function(s){return '<li>'+s+'</li>'}).join('')+'</ul>';
  }
  btn.addEventListener('click',function(){
