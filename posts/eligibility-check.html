@@ -29,8 +29,18 @@
 <div class="grid2">
 <div>
 <h1>정책자금 자격 자가진단</h1>
-<p class="meta">7문항 · 30초 · 결과 즉시 · <b>입력값은 서버로 전송되지 않고 이 브라우저 안에서만 계산됩니다.</b> 이미 입력하신 적이 있다면 브라우저에 저장된 값으로 다시 시작합니다.</p>
+<p class="meta">7문항 · 30초 · 결과 즉시 · <b>입력값은 서버로 전송되지 않고 이 브라우저 안에서만 계산됩니다.</b> 이미 입력하신 적이 있다면 브라우저에 저장된 값으로 다시 시작합니다.<br><a href="#bno">사업자등록번호가 이미 있다면 7문항 전에 30초 상태 조회 ↓</a></p>
 
+
+
+<div id="bno" class="q-card" style="border-left:3px solid #1470a0">
+<b>사업자등록번호로 바로 확인</b> <span style="color:#666;font-size:13px">— 국세청 공개 API(사업자등록 상태·과세유형)를 사용합니다. 조회한 번호는 저장되지 않습니다. ※ 게시판 정적 페이지에서는 조회 서버 연결 시 활성화됩니다 — 그전에는 7문항을 이용하세요.</span>
+<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+<input id="bnoInput" inputmode="numeric" placeholder="사업자등록번호 10자리 (숫자만)" maxlength="12" style="flex:1;min-width:180px;padding:10px;border:1px solid #bbb;border-radius:6px;font-size:16px">
+<button id="bnoBtn" class="btn" type="button" style="padding:10px 16px">조회</button>
+</div>
+<div id="bnoOut" style="margin-top:10px"></div>
+</div>
 
 <form id="quiz" onsubmit="event.preventDefault();check()">
 
@@ -149,6 +159,37 @@ const FUNDS={
  ban:{n:'직접대출 제한 가능성 확인 필요',d:'휴·폐업 예정, 유흥·향락, 투기적 부동산업 등은 직접대출에서 제외되거나 제한됩니다. 다만 업종 세부는 예외가 많아 공고문 별표와 상담으로 최종 판단하세요.',u:'https://ols.semas.or.kr',t:'bad'}
 };
 function tag(t){return t==='good'?'<span class="tag">유력 후보</span>':t==='mid'?'<span class="tag warn">조건부 후보</span>':'<span class="tag bad">제한 확인 필요</span>';}
+
+// ── 사업자번호 조회 (국세청 상태조회 — 키는 서버 프록시에만) ──
+(function(){
+ var API='/api/nts/status';
+ var API_LOCAL='http://127.0.0.1:8898/status';
+ var btn=document.getElementById('bnoBtn'), box=document.getElementById('bnoOut'), ip=document.getElementById('bnoInput');
+ if(!btn) return;
+ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]})}
+ function post(url,body){return fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})}
+ function render(d){
+   var it=(d.data||[])[0]||{}; var b=ip.value.replace(/\D/g,'');
+   if(!it.b_stt && /등록되지/.test(it.tax_type||'')){box.innerHTML='<b style="color:#b00020">'+esc(b)+' — 국세청에 등록되지 않은 번호입니다.</b> 번호를 다시 확인해 주세요.';return;}
+   var st=it.b_stt||'상태 확인 불가';
+   var cls=it.b_stt_cd==='01'?'#0a7d3c':(it.b_stt_cd==='03'?'#b00020':'#b36b00');
+   var h='<table style="width:100%;border-collapse:collapse;font-size:14px"><tr><td style="color:#777;padding:4px 8px 4px 0">사업 상태</td><td><b style="color:'+cls+'">'+esc(st)+'</b>'+(it.end_dt&&it.b_stt_cd==='03'?' (폐일 '+esc(it.end_dt)+')':'')+'</td></tr><tr><td style="color:#777;padding:4px 8px 4px 0">과세 유형</td><td>'+esc(it.tax_type||'-')+(it.utcc_yn==='Y'?' · 전자세금계산서 발급 중':'')+'</td></tr></table>';
+   var tips=[];
+   if(it.b_stt_cd==='03') tips.push('폐업 상태라면 정책자금 직접대출은 원칙적으로 제외 — <b>희망리턴패키지·재도전지원자금</b>이 먼저입니다. 아래 1번 문항을 "폐업"으로 고르세요.');
+   else if(it.b_stt_cd==='02') tips.push('휴업 상태도 서류상 살아있다면 자금이 열리는 경우가 많습니다. 휴업 사유·기간을 정리해 두세요.');
+   else tips.push('정상 번호 확인 완료 — 아래 7문항에서 매출·신용·용도만 고르면 후보 자금이 좁혀집니다.');
+   box.innerHTML=h+'<ul style="margin:8px 0 0 18px;padding:0;font-size:14px">'+tips.map(function(s){return '<li>'+s+'</li>'}).join('')+'</ul>';
+ }
+ btn.addEventListener('click',function(){
+   var b=ip.value.replace(/\D/g,'');
+   if(b.length!==10){box.innerHTML='<b style="color:#b00020">숫자 10자리만 입력해 주세요.</b>';ip.focus();return;}
+   box.textContent='조회 중…';
+   post(API,{'b_no':[b]}).catch(function(){return post(API_LOCAL,{'b_no':[b]}).catch(function(){throw new Error('오프라인')})})
+     .then(render)
+     .catch(function(){box.innerHTML='<b>조회 서버에 연결되지 않았습니다.</b> (개발 서버 실행: ops/nts/nts_proxy.py) 그전에는 아래 7문항을 그대로 이용하면 됩니다.';});
+ });
+ ip.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();btn.click();}});
+})();
 function check(){
  const f=(id)=>document.getElementById(id);
  const status=document.querySelector('input[name=status]:checked').value;
