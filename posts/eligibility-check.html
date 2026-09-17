@@ -3,7 +3,25 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>정책자금 자격 자가진단 — 7문항 30초 | 자금레이더</title>
 <meta name="description" content="업력·매출·신용·업종 7문항으로 소진공 직접대출·창업자금·재도전지원금·지역신보 보증부대출 후보를 한 번에 진단하는 무료 도구. 입력값은 브라우저에서만 처리됩니다.">
-<link rel="stylesheet" href="../style.css"></head>
+<link rel="stylesheet" href="../style.css">
+<style>
+/* 진단 도구 — 첫 화면 진입 최적화 */
+#quiz{margin-top:10px}
+.q-card{border:1px solid var(--line,var(--border,#ddd));border-radius:10px;padding:14px 16px;margin:0 0 12px;background:#fff}
+.q-card legend{font-weight:700;font-size:15px;padding:0 6px}
+.q-card label{display:block;font-weight:400;font-size:14.5px;margin:7px 0;line-height:1.5;cursor:pointer}
+.q-card select{width:100%;padding:10px 12px;font-size:15px;border:1px solid var(--line,#ccc);border-radius:8px;background:#fff}
+.q-optional{border-style:dashed;background:transparent}
+.q-optional legend{font-weight:600;color:#666}
+#progress{height:6px;background:#eee;border-radius:3px;margin:0 0 16px;overflow:hidden}
+#progress>div{height:100%;width:0;background:#2e7d32;transition:width .25s;border-radius:3px}
+#submitwrap{position:sticky;bottom:0;background:linear-gradient(transparent,#fff 30%);padding:14px 0 10px;margin-top:4px}
+#submitwrap .btn{width:100%;font-size:17px;padding:14px}
+#remaining{font-size:13px;color:#888;display:block;text-align:center;margin-top:6px}
+.answered .q-card{opacity:1}
+@media (max-width:640px){.q-card{padding:12px}.q-card legend{font-size:14px}}
+</style>
+</head>
 <body>
 <header><div class="wrap"><a class="logo" href="../index.html">자금레이더</a>
 <nav><a href="../index.html">홈</a><a href="../index.html">글 목록</a><a href="../about.html">소개</a><a href="../contact.html">광고·문의</a></nav></div></header>
@@ -11,7 +29,7 @@
 <div class="grid2">
 <div>
 <h1>정책자금 자격 자가진단</h1>
-<p class="meta">7문항 · 30초 · 결과 즉시 · <b>입력값은 서버로 전송되지 않고 이 브라우저 안에서만 계산됩니다.</b></p>
+<p class="meta">7문항 · 30초 · 결과 즉시 · <b>입력값은 서버로 전송되지 않고 이 브라우저 안에서만 계산됩니다.</b> 이미 입력하신 적이 있다면 브라우저에 저장된 값으로 다시 시작합니다.</p>
 
 
 <form id="quiz" onsubmit="event.preventDefault();check()">
@@ -59,7 +77,7 @@
 </select>
 </fieldset>
 
-<fieldset class="q-card"><legend>6. 대출 용도</legend>
+<fieldset class="q-card"><legend>6. 대출 용도 <span style="font-weight:400;color:#888;font-size:13px">(결과 정확도에 가장 큰 영향)</span></legend>
 <select id="purpose" name="purpose">
 <option value="">선택하세요</option>
 <option value="ops">운영자금 (재료비·인건비·경영안정)</option>
@@ -67,10 +85,11 @@
 <option value="replace">높은 이자 사업자대출 갈아타기 (대환)</option>
 <option value="start">창업 자금</option>
 <option value="close">폐업 정리·철거·배우자 취업 지원</option>
+<option value="contract">정부·지자체 계약 (나라장터)로 매출 만들기</option>
 </select>
 </fieldset>
 
-<fieldset class="q-card"><legend>7. 해당 사항 (복수 선택 가능)</legend>
+<fieldset class="q-card q-optional"><legend>7. 해당 사항 (복수 선택 가능) <span style="font-weight:400;color:#888;font-size:13px">— 해당 없으면 건너뛰세요</span></legend>
 <label><input type="checkbox" name="extra" value="young"> 39세 이하 청년 소상공인</label>
 <label><input type="checkbox" name="extra" value="woman"> 여성 가장·한부모 등 취약계층</label>
 <label><input type="checkbox" name="extra" value="eco"> 사회적기업·예비사회적기업·협동조합</label>
@@ -78,7 +97,9 @@
 <label><input type="checkbox" name="extra" value="faithful"> 정책금융(신보·소진공) 대출 12개월 이상 성실상환 중</label>
 </fieldset>
 
-<button class="btn" type="submit">결과 보기</button>
+<div id="progress"><div id="bar"></div></div>
+<div id="submitwrap"><button class="btn" type="submit">결과 보기</button>
+<span id="remaining"></span></div>
 </form>
 
 <div id="result"></div>
@@ -134,7 +155,15 @@ function check(){
  const y=+f('years').value, r=+f('revenue').value, c=f('credit').value, ind=f('industry').value, p=f('purpose').value;
  const ex=[...document.querySelectorAll('input[name=extra]:checked')].map(e=>e.value);
  if(isNaN(r)||!c||!ind||!p){alert('모든 문항을 선택해주세요.');return;}
- let hits=[],notes=[];
+ let hits=[],notes=[],tools=[];
+ tools.push('hometax');
+ if(c!=='ok'||p==='replace') tools.push('credit');
+ if(p==='ops'||p==='start'||p==='facility') tools.push('kstartup');
+ if(p==='contract') tools.push('g2b');
+ if(p==='close') tools.push('hope2');
+ else tools.push('asmm');
+ if(ind==='uncertain'||ind==='restricted') tools.push('sbox');
+ if(y<3&&status!=='closed') tools.push('g365');
  if(status==='closed'){
    if(p==='close') hits.push('hope','voucher'); else hits.push('hope','retry');
    if(p==='start') hits.push('retry');
@@ -147,6 +176,7 @@ function check(){
    if((status==='pre'||y<3)&&(p==='start'||p==='ops')&&c!=='bad') hits.push('start');
    if(p==='replace'&&c!=='ok') hits.push('replace');
    if(p==='replace'&&c==='ok') {hits.push('replace');notes.push('신용 양호자도 대상이 되는 대환상품(저금리 갈아타기)이 있습니다. 이용 중인 대출의 금리증명서류가 핵심입니다.');}
+
    if(c!=='ok') hits.push('sinbo');
    if(c==='ok'&&r<=2&&p!=='replace') hits.push('sinbo');
    if(p==='close') hits.push('hope');
@@ -163,9 +193,51 @@ function check(){
  if(!uniq.length) out+='<p>현재 입력 기준으로 유력 후보가 약합니다. 다만 업력·매출 요건이 다른 <b>시·군·구 자체 소규모 자금</b>과 카드론 대체 상품이 남으므로 지역 신용재단 창구는 열어두세요.</p>';
  uniq.forEach(k=>{const x=FUNDS[k];out+=`<div class="fund ${x.t==='good'?'':x.t}"><h4>${tag(x.t)} ${x.n}</h4><p style="margin:6px 0">${x.d}</p><p class="meta">신청 창구: <a href="${x.u}" rel="noopener">${x.u.replace(/^https?:\/\//,'')}</a></p></div>`;});
  if(notes.length) out+='<h2>추가 확인 포인트</h2><ul>'+notes.map(n=>'<li>'+n+'</li>').join('')+'</ul>';
+ if(tools.length){
+   const T={
+     hometax:{n:'홈택스 — 사업자등록증명·완납증명 발급',d:'접수 전 필수 서류. 떨어뜨리면 다음 단계가 막힙니다.',u:'https://www.hometax.go.kr'},
+     credit:{n:'신용점수 조회 (개인·기업)',d:'나이스지키미·토스·credit4u에서 무료 조회. 보증 한도와 금리 구간을 점수가 좌우합니다.',u:'https://www.credit4u.or.kr'},
+     kstartup:{n:'K-Startup 창업사업 검색',d:'업력·유형(사업화·기술개발·융자보증) 필터로 예비·초기 창업 창구 확인.',u:'https://www.k-startup.go.kr'},
+     hope2:{n:'희망리턴패키지 원문',d:'폐업(예정) 소상공인 지원 — 컨설팅·철거비·재기지원 공고 원본.',u:'http://www.hope.return.go.kr'},
+     asmm:{n:'소진공 정책자금 공고',d:'ols.semas.or.kr 공지사항에서 접수 중 공고·마감일 확인.',u:'https://ols.semas.or.kr'},
+     g2b:{n:'나라장터 내 업종 공고 스캔',d:'조달청에서 지역·업종 필터로 마감 전 공고 확인. 대출보다 계약이 맞을 때의 창구입니다.',u:'https://www.g2b.go.kr'},
+     sbox:{n:'업종 제한 최종 확인',d:'표준산업분류 코드로 소진공·신보 제한 업종 여부를 상담 문의. 모르겠음이라면 이 칸이 결론입니다.',u:'https://www.sbiz.or.kr'},
+     g365:{n:'소상공인365 내 상권 현황',d:'동종 업소 수·평균 매출 비교. 사업계획서와 상담 근거로 바로 씁니다.',u:'http://www.gsimdata.kr'},
+   };
+   out+='<h2>조건별 다음 창구</h2><ul>'+tools.map(k=>{const x=T[k];return '<li><a href="'+x.u+'" rel="noopener nofollow">'+x.n+'</a> — '+x.d+'</li>';}).join('')+'</ul>';
+ }
  out+='<h2>다음 3단계</h2><ol><li>홈택스에서 사업자등록증명·부가가치세과세표준증명 발급</li><li><a href="https://ols.semas.or.kr">ols.semas.or.kr</a> 공지사항에서 접수 중 공고·마감일 확인</li><li>보증부 후보가 있으면 관할 지역신용보증재단 문의</li></ol>';
+ try{localStorage.setItem('jgr_diag_v1',JSON.stringify({status:status,years:f('years').value,revenue:f('revenue').value,credit:c,industry:ind,purpose:p,extra:ex}));}catch(e){}
  document.getElementById('result').innerHTML=out;
  document.getElementById('result').scrollIntoView({behavior:'smooth'});
 }
+
+// —— 재방문 복원 + 진행 표시 + 자동 저장 —
+(function(){
+ var KEY='jgr_diag_v1';
+ function q(s){return document.querySelector(s)} function qa(s){return [].slice.call(document.querySelectorAll(s))}
+ function bar(){
+   var need=[['input[name=status]:checked'],['#years','#revenue','#credit','#industry','#purpose']];
+   var done=0,tot=5;
+   if(q('input[name=status]:checked'))done++;
+   ['#years','#revenue','#credit','#industry','#purpose'].forEach(function(s){var el=q(s);if(el&&el.value!=='')done++;});
+   var b=q('#bar'),r=q('#remaining');
+   if(b)b.style.width=Math.round(done/tot*100)+'%';
+   if(r){var left=tot-done;r.textContent=left?(left+'문항 남음'):'다 고르셨으면 결과 보기를 누르세요';}
+ }
+ function restore(){
+   var raw=null; try{raw=localStorage.getItem(KEY)}catch(e){}
+   if(!raw)return;
+   var d={}; try{d=JSON.parse(raw)}catch(e){return}
+   if(d.status){var el=q('input[name=status][value="'+d.status+'"]');if(el)el.checked=true;}
+   [['#years','years'],['#revenue','revenue'],['#credit','credit'],['#industry','industry'],['#purpose','purpose']].forEach(function(m){
+     if(d[m[1]]!=null&&d[m[1]]!==''){var el=q(m[0]);if(el)el.value=d[m[1]];}});
+   (d.extra||[]).forEach(function(v){var el=q('input[name=extra][value="'+v+'"]');if(el)el.checked=true;});
+ }
+ var had=restore();
+ function barNCheck(){bar();}
+ document.addEventListener('change',barNCheck); document.addEventListener('input',barNCheck);
+ window.addEventListener('load',function(){bar();if(had&&typeof check==='function'){try{check()}catch(e){}}});
+})();
 </script>
 </body></html>
