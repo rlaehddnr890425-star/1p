@@ -41,7 +41,7 @@
       var tips=[];
       if(it.b_stt_cd==='03')tips.push('폐업 상태라면 정책자금 적접대행은 원칙적으로 제한됩니다. 희망리턴패키지·재도전지원자금 경로를 먼저 두들면 됩니다.');
       else if(it.b_stt_cd==='02')tips.push('휴업 중이라도 근고록보험 등이 유지되면 자금이 열리는 경우가 있습니다. 휴업 사유와 기간을 정리해 둘니다.');
-      else tips.push('계속사업자 확인 완료 — 그닥 목록에서 <a href=../posts/eligibility-check.html>정책자금 자겠 자가진단</a>으로 연달하면 후보 자금까지 찾을 수 있습니다.');
+      elsetips.push('계속사업자 확인 완료 — 이어서 <a href=../posts/eligibility-check.html>정책자금 자격 자가진단</a>에서 매출·업종·용도를 고르면 후보 자금이 좁혀집니다.');
       out.innerHTML=h+'<ul style=margin:10px 0 0 18px;padding:0;font-size:14px>'+tips.map(function(s){return '<li>'+s+'</li>'}).join('')+'</ul>';
     }).catch(function(){
       out.innerHTML='<b style=color:#b00020>국세청 조회 서버에 연결하지 못했습니다.</b> 조회 서버(이 기기에서 실행 중인 국세청 중계)에 연결되지 않은 상태입니다. 페이지 새로고침 후 다시 시도하거나, <a href="https://www.hometax.go.kr" target="_blank" rel="noopener">홈택스</a>에서 직접 확인하세요.';
