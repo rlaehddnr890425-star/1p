@@ -92,7 +92,8 @@ code{background:#f1efe9;border-radius:4px;padding:1px 5px;font-size:12.5px}
 @media(max-width:760px){.hero h1{font-size:24px}}
 /* 홈 헤더 반응형: 로고+광고·문의 남기고 한 줄로 압축 (2026-09-18) */
 @media(max-width:820px){
-  header .wrap,header .hrow{gap:2px 14px;padding:10px 0}
+  header .wrap,header .hrow{gap:2px 12px;padding:10px 0}
+  header .hrow{justify-content:space-between}
   nav a{margin-left:12px;font-size:13px}
 }
 
