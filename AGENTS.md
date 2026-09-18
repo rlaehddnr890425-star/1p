@@ -15,5 +15,13 @@
 ## 발행 전 게이트 (자동)
 `python3 _build/pii_check.py` 실행 → 1이라도 나오면 push 금지. git pre-push 훅(`.githooks/`)에 연결돼 있어 push 시 자동 실행되지만, 훅은 `git config core.hooksPath .githooks`를 설정한 클론에서만 동작하므로 새 환경에서는 직접 실행할 것.
 
+## 헤더 통일 (2026-09-18 사용자 확정)
+- 전 페이지 공통 헤더 마크업: `<header class="hwrap"><div class="hrow">` + 로고 + 동일 5개 메뉴(정책자금·자격 진단·가이드·소개·광고·문의), 다른 메뉴 조합 변형 금지
+- 정렬: **로고+메뉴 블록 통째로 화면 중앙** (`justify-content:center`, 좌/우 양끝 분산 금지) — CSS는 `header .hrow` 공용 규칙 하나만 두고, `body.home header .hrow` 같은 페이지 한정 셀렉터로 재정의하지 않는다. 820px 이하에서도 중앙 유지(줄바꿈 허용).
+- 자가진단(`posts/eligibility-check.html`)은 홈 히어로와 다른 별도 상단(제목+h1) 구조가 **정상이며** 초록 상태 배너를 붙이지 않는다(원고 불일치 방지).
+
+## 발행 전 게이트 (자동)
+`python3 _build/pii_check.py` 실행 → 1이라도 나오면 push 금지. git pre-push 훅(`.githooks/`)에 연결돼 있어 push 시 자동 실행되지만, 훅은 `git config core.hooksPath .githooks`를 설정한 클론에서만 동작하므로 새 환경에서는 직접 실행할 것.
+
 ## 애드센스 관련 오해 금지
 실명 표기가 없어도 애드센스 심사에 불리하지 않다. 요구되는 건 실재 연락처다. 과거 "about.html 운영자 실명 표기"는 잘못된 관행이므로 영구 폐기.
