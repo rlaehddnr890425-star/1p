@@ -14,8 +14,8 @@
 
 <section class="hero">
 <h1>사장님이 오늘 신청할 수 있는 지원만,<br>공식 공고 기준으로 정리합니다.</h1>
-<p class="sub">정책자금 · 정부지원사업 · 공공조달 · 기업인증 — 대상 · 금액 · 마감 · 필요서류 · 다음 행동까지. 모든 수치에는 원문과 검증 시각이 붙습니다.</p>
-<p class="stamp">최종 검증 <b>{{VERIFIED_AT}}</b> · 접수 중 공고 <b>{{N_OPEN}}</b>건 · 정책자금 상품 <b>{{N_FUNDS}}</b>종 (직접 6 · 대리 7)</p>
+<p class="sub">정책자금 · 정부지원사업 · 공공조달 · 기업인증 — 대상 · 금액 · 마감 · 필요서류 · 다음 행동까지.</p>
+<p class="stamp">오늘 기준 접수 중 공고 <b>{{N_OPEN}}</b>건 · 정책자금 상품 <b>{{N_FUNDS}}</b>종 (직접 6 · 대리 7)<span class="mini-stamp">공고 상태 확인 기준일 {{VERIFIED_DATE}}</span></p>
 <div class="cta">
 <a class="btn" href="posts/eligibility-check.html">내 사업장 30초 진단</a>
 <a class="btn ghost" href="#fundboard">접수 중 공고 보기</a>
@@ -23,8 +23,8 @@
 </section>
 
 <section id="fundboard">
-<h2>접수 중 · 방금 검증한 공고</h2>
-<p class="dim small">이 카드는 <code>data/notices.json</code>에서 생성됩니다. 검증 시각이 지난 항목은 자동 제외 — 숫자는 실제 데이터에서만 나옵니다.</p>
+<h2>최근 확인한 정책자금 공고</h2>
+<p class="dim small">아래는 최근 확인한 공고이며, 각 카드의 <b>접수중</b>·<b>접수마감</b> 표시가 현재 상태를 나타냅니다. 마감·연장 여부는 신청처에서 최종 확인하세요.</p>
 <div class="ncards">
 {{NOTICE_CARDS}}
 </div>
@@ -32,7 +32,7 @@
 
 <section id="fundtable">
 <h2>정책자금 13종 한눈에 보기</h2>
-<p class="dim small">출처: 소진공 정책자금 안내·한눈에보기 (검증 {{VERIFIED_AT}}) · 기준금리 <b>3.85%</b> (2026-07-10~, 분기별 변동) · 전체 요건·절차·이자 계산은 <a href="posts/policy-fund-map.html">정책자금 2026 총정리</a></p>
+<p class="dim small">기준금리 <b>3.85%</b> (2026-07-10~, 분기별 변동) · 전체 요건·절차·이자 계산은 <a href="posts/policy-fund-map.html">정책자금 2026 총정리</a></p>
 <div class="tscroll"><table>
 <tr><th>자금</th><th>누가</th><th>한도</th><th>금리</th><th>기간</th></tr>
 {{FUND_ROWS}}
@@ -66,7 +66,7 @@
 <h2>운영 원칙</h2>
 <ul>
 <li>모든 수치는 공식 원문 대조 후 수록 — 정정·삭제 요구는 원문과 함께 처리합니다</li>
-<li>글마다 발행일 + 최종 확인 시각 + 상태 표기 (최종 확인 <b>{{VERIFIED_AT}}</b>)</li>
+<li>글마다 발행일 + 접수 상태 표기 (홈 공고 기준일 <b>{{VERIFIED_DATE}}</b>)</li>
 <li>정부기관을 사칭하지 않습니다 — 민간 정보 서비스입니다</li>
 </ul>
 </section>

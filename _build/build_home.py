@@ -34,11 +34,11 @@ def notice_cards():
     for n in NOTICES['funds']:
         rows = ''.join('<div><dt>' + k + '</dt><dd>' + n[a] + '</dd></div>'
                           for k, a in (('누가','who'),('얼마','amount'),('금리','rate'),('기간','term'),('방식','method')))
-        out.append('<div class="ncard"><div class="nhead"><span class="st">' + n['status']
+        cls = 'st' if n['status'] == '접수중' else 'st closed'
+        out.append('<div class="ncard"><div class="nhead"><span class="' + cls + '">' + n['status']
             + '</span><span class="cat">' + n['category'] + ' · ' + n['channel'] + '</span></div><h3>'
             + n['title'] + '</h3><dl>' + rows + '</dl><div class="nfoot"><a class="btn sm" href="'
-            + n['apply'] + '" rel="nofollow">신청처</a><a class="ghost" href="posts/policy-fund-map.html">자격·요건 보기</a></div>'
-            + '<p class="vstamp">원문 ' + n['source'][:14] + ' · 검증 ' + n['verified_at'] + '</p></div>')
+            + n['apply'] + '" rel="nofollow">신청처</a><a class="ghost" href="posts/policy-fund-map.html">자격·요건 보기</a></div></div>')
     return chr(10).join(out)
 
 def fund_rows():
@@ -60,7 +60,7 @@ def main():
     tpl = (ROOT / 'templates' / 'home.tpl.html').read_text()
     html = (tpl.replace('{{NOTICE_CARDS}}', notice_cards())
                 .replace('{{FUND_ROWS}}', fund_rows())
-                .replace('{{VERIFIED_AT}}', NOTICES['updated_at'])
+                .replace('{{VERIFIED_DATE}}', NOTICES['updated_at'][:10])
                 .replace('{{N_OPEN}}', str(len(NOTICES['funds'])))
                 .replace('{{N_FUNDS}}', str(len(FUNDS['funds']))))
     if '{{' in html:
