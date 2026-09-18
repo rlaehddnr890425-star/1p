@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-09-18 20:08",
+ "generated_at": "2026-09-18 21:45",
  "window_days": 7,
- "count": 7380,
+ "count": 7385,
  "items": [
   {
    "kind": "용역",
@@ -27094,6 +27094,48 @@
   },
   {
    "kind": "용역",
+   "bidNo": "R26BK01737643000",
+   "title": "영주문어1955글로컬상권 : 영주문어페스타 운영용역(긴급)",
+   "agency": "혜인협동조합",
+   "noticeAt": "2026-09-18 20:37:58",
+   "dealMethod": "직찰",
+   "estAmount": "170940000",
+   "bidEndAt": "",
+   "tags": [
+    "소액"
+   ],
+   "url": "https://www.g2b.go.kr/inv_bid/notice/PtlInvBidNoticeInfo.do?bidNo=R26BK01737643"
+  },
+  {
+   "kind": "용역",
+   "bidNo": "R26BK01737645000",
+   "title": "굴착공사 범위 지도 정보화 사업 시스템 개발 용역 ",
+   "agency": "한국가스안전공사",
+   "noticeAt": "2026-09-18 20:45:57",
+   "dealMethod": "전자입찰",
+   "estAmount": "89000000",
+   "bidEndAt": "2026-09-29 10:00:00",
+   "tags": [
+    "소액"
+   ],
+   "url": "https://www.g2b.go.kr/inv_bid/notice/PtlInvBidNoticeInfo.do?bidNo=R26BK01737645"
+  },
+  {
+   "kind": "용역",
+   "bidNo": "R26BK01736551000",
+   "title": "경수형 SMR 핵연료 계량검증용 기초 데이터 확보 및 절차 개발",
+   "agency": "조달청",
+   "noticeAt": "2026-09-18 21:02:40",
+   "dealMethod": "전자시담",
+   "estAmount": "504110000",
+   "bidEndAt": "2026-09-21 15:00:00",
+   "tags": [
+    "소액"
+   ],
+   "url": "https://www.g2b.go.kr/inv_bid/notice/PtlInvBidNoticeInfo.do?bidNo=R26BK01736551"
+  },
+  {
+   "kind": "용역",
    "bidNo": "R26BK01726321000",
    "title": "합천 영상테마파크 주변 관광지 활성화사업(보행교) 건설사업관리용역",
    "agency": "경상남도 합천군",
@@ -36664,6 +36706,20 @@
     "소액"
    ],
    "url": "https://www.g2b.go.kr/inv_bid/notice/PtlInvBidNoticeInfo.do?bidNo=R26BK01737635"
+  },
+  {
+   "kind": "용역",
+   "bidNo": "R26BK01737343000",
+   "title": "청소년 복지시설 건립공사 감독권한대행 등 건설사업관리용역 사업수행능력평가서(PQ) 제출안내 및 전자 입찰공고",
+   "agency": "울산광역시 동구",
+   "noticeAt": "2026-09-18 20:22:46",
+   "dealMethod": "전자입찰",
+   "estAmount": "300179000",
+   "bidEndAt": "2026-10-27 14:00:00",
+   "tags": [
+    "소액"
+   ],
+   "url": "https://www.g2b.go.kr/inv_bid/notice/PtlInvBidNoticeInfo.do?bidNo=R26BK01737343"
   },
   {
    "kind": "물품",
@@ -76087,32 +76143,32 @@
    "url": "https://www.g2b.go.kr/inv_bid/notice/PtlInvBidNoticeInfo.do?bidNo=R26BK01737631"
   },
   {
-   "kind": "공사",
-   "bidNo": "R26BK01726285000",
-   "title": "난지처리구역 불량 하수관로 비굴착 보수공사(2권역)",
-   "agency": "서울특별시 성동구",
-   "noticeAt": "2026-09-11 20:39:28",
+   "kind": "물품",
+   "bidNo": "R26BK01726819001",
+   "title": "2026/2027년 제설제(소금) 구매",
+   "agency": "서울특별시 강남구",
+   "noticeAt": "2026-09-18 20:13:31",
    "dealMethod": "전자입찰",
-   "estAmount": "469040000",
-   "bidEndAt": "2026-09-18 10:00:00",
+   "estAmount": "185900000",
+   "bidEndAt": "2026-09-21 10:00:00",
    "tags": [
     "소액"
    ],
-   "url": "https://www.g2b.go.kr/inv_bid/notice/PtlInvBidNoticeInfo.do?bidNo=R26BK01726285"
+   "url": "https://www.g2b.go.kr/inv_bid/notice/PtlInvBidNoticeInfo.do?bidNo=R26BK01726819"
   },
   {
-   "kind": "공사",
-   "bidNo": "R26BK01726285001",
-   "title": "난지처리구역 불량 하수관로 비굴착 보수공사(2권역)",
-   "agency": "서울특별시 성동구",
-   "noticeAt": "2026-09-11 21:27:28",
+   "kind": "물품",
+   "bidNo": "R26BK01737642000",
+   "title": "2026년도 의약품 2차 추가 단가계약",
+   "agency": "국립암센터",
+   "noticeAt": "2026-09-18 20:37:35",
    "dealMethod": "전자입찰",
-   "estAmount": "469040000",
-   "bidEndAt": "2026-09-18 10:00:00",
+   "estAmount": "719924410",
+   "bidEndAt": "2026-09-30 10:00:00",
    "tags": [
     "소액"
    ],
-   "url": "https://www.g2b.go.kr/inv_bid/notice/PtlInvBidNoticeInfo.do?bidNo=R26BK01726285"
+   "url": "https://www.g2b.go.kr/inv_bid/notice/PtlInvBidNoticeInfo.do?bidNo=R26BK01737642"
   },
   {
    "kind": "공사",
@@ -102903,6 +102959,22 @@
     "소액"
    ],
    "url": "https://www.g2b.go.kr/inv_bid/notice/PtlInvBidNoticeInfo.do?bidNo=R26BK01737633"
+  },
+  {
+   "kind": "공사",
+   "bidNo": "R26BK01737640000",
+   "title": "서호마을 마을만들기(자율개발)사업『지역경관개선』공사",
+   "agency": "한국농어촌공사 제주지역본부",
+   "noticeAt": "2026-09-18 20:28:29",
+   "dealMethod": "전자입찰",
+   "estAmount": "105389669",
+   "bidEndAt": "2026-09-29 10:00:00",
+   "tags": [
+    "소액",
+    "지역제한",
+    "농촌공사"
+   ],
+   "url": "https://www.g2b.go.kr/inv_bid/notice/PtlInvBidNoticeInfo.do?bidNo=R26BK01737640"
   }
  ]
 }
