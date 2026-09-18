@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>공공입찰 공고 검색 — 나라장터 30일분 7,385건 | 자금레이더</title>
+<meta name="description" content="나라장터 물품·용역·공사 공고 30일분을 목적물 키워드·기관명·예상가격으로 즉시 필터링합니다. 입력값은 브라우저 밖으로 나가지 않습니다.">
+<link rel="canonical" href="https://rlaehddnr890425-star.github.io/1p/tools/bid-search.html">
+<link rel="stylesheet" href="../style.css?v=20260918c">
+</head><body>
+<header class="hwrap"><div class="hrow">
+<a class="logo" href="../index.html">자금레이더</a>
+<nav><a href="../index.html?v=20260918#fundboard">정책자금</a><a href="../tools.html?v=20260918">자가진단</a><a href="../index.html?v=20260918#guides">가이드</a><a href="../about.html?v=20260918">소개</a><a href="../contact.html?v=20260918">광고·문의</a></nav>
+</div></header>
+<main class="hwrap">
+<h1>공공입찰 공고 검색</h1>
+<p class="sub" id="cnt">나라장터에 최근 30일 동안 올라온 물품·용역·공사 공고에서 목적물·기관명으로 검색합니다. 목록의 상태는 공고 시점 기준으로, 실제 마감 여부는 반드시 원문 공고문에서 확인하세요.</p>
+<div class="card">
+  <input id="kw" type="text" placeholder="목적물 키워드 — 예: 청소, 소프트웨어, 교복" autocomplete="off" style="width:100%;padding:10px 12px;font-size:15px;border:1px solid #ccc;border-radius:8px">
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;font-size:14px">
+    <label><input type="checkbox" name="kind" value="물품" checked> 물품</label>
+    <label><input type="checkbox" name="kind" value="용역" checked> 용역</label>
+    <label><input type="checkbox" name="kind" value="공사" checked> 공사</label>
+    <label style="margin-left:auto"><input type="checkbox" id="openonly" checked> 접수 중만</label>
+  </div>
+  <div style="display:flex;gap:8px;margin-top:10px;font-size:14px;align-items:center">
+    <label>예상가격 ≥</label>
+    <select id="amin" style="padding:6px;border:1px solid #ccc;border-radius:6px">
+      <option value="0">전체</option><option value="10000000">1,000만</option><option value="50000000">5,000만</option><option value="100000000">1억</option><option value="500000000">5억</option>
+    </select>
+    <label>≤</label>
+    <select id="amax" style="padding:6px;border:1px solid #ccc;border-radius:6px">
+      <option value="999999999999">전체</option><option value="10000000">1,000만</option><option value="50000000">5,000만</option><option value="100000000">1억</option><option value="1000000000">10억</option>
+    </select>
+    <input id="ag" type="text" placeholder="발주기관명" autocomplete="off" style="flex:1;min-width:120px;padding:6px;border:1px solid #ccc;border-radius:6px">
+    <button id="clr" style="padding:6px 12px;border:1px solid #0f5132;background:#fff;color:#0f5132;border-radius:6px;cursor:pointer">지우기</button>
+  </div>
+</div>
+<div id="out" style="margin-top:14px"></div>
+<p class="sub" style="margin-top:26px">※ 30일보다 오래된 공고·개찰 결과·규격서는 나라장터에서 직접 검색하세요. <a href="https://www.g2b.go.kr" target="_blank" rel="noopener">나라장터 바로 가기</a></p>
+</main>
+<script>
+(function(){
+var data=null,kw=document.getElementById('kw'),ag=document.getElementById('ag'),out=document.getElementById('out');
+function load(){if(data)return Promise.resolve();return fetch('../data/bids.json').then(function(r){return r.json()}).then(function(d){data=d.items;document.getElementById('cnt').textContent='최근 30일 공고 '+data.length+'건('+(d.collected||d.source||'')+' 기준)에서 목적물·기관명으로 검색합니다. 상태는 공고 시점 기준이며 실제 마감 여부는 원문 공고문에서 확인하세요.';});}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]})}
+function money(n){n=+n||0;var e=Math.floor(n/100000000);var m=Math.round((n%100000000)/10000);return e?e+'억'+(m?m.toLocaleString()+'만':''):n?m.toLocaleString()+'만':''}
+function today(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+function kinds(){return [...document.querySelectorAll('input[name=kind]:checked')].map(function(x){return x.value})}
+function render(){
+  var k=kw.value.trim(), g=ag.value.trim(), ks=kinds();
+  var amin=+document.getElementById('amin').value, amax=+document.getElementById('amax').value;
+  var openonly=document.getElementById('openonly').checked, td=today();
+  if(!k&&!g&&!ks.length){out.innerHTML='';return}
+  var hits=data.filter(function(it){
+    if(ks.indexOf(it.kind)<0)return false;
+    if(k&&(it.title+' '+it.agency).toLowerCase().indexOf(k.toLowerCase())<0)return false;
+    if(g&&it.agency.replace(/\s/g,'').indexOf(g.replace(/\s/g,''))<0)return false;
+    var a=+it.estAmount||0; if(a<amin||a>amax)return false;
+    if(openonly&&(it.bidEndAt||'9999').slice(0,10)<td)return false;
+    return true;
+  }).sort(function(a,b){return (a.bidEndAt||'9999').localeCompare(b.bidEndAt||'9999')});
+  if(!hits.length){out.innerHTML='<div class=card>조건에 맞는 공고가 없습니다. 키워드를 줄여 보세요.</div>';return}
+  var rows=hits.slice(0,30).map(function(it){
+    var closed=(it.bidEndAt||'').slice(0,10)<today();
+    return '<div class=card><b>'+esc(it.title)+'</b> <span class=tag>'+esc(it.kind)+'</span>'+(closed?' <span class="tag bad">마감</span>':'')+'<p class=sub style=margin:6px 0>'+esc(it.agency)+' · 추정 '+money(it.estAmount)+' · '+(it.dealMethod||'')+(it.tags&&it.tags.length?' · '+it.tags.map(esc).join(', '):'')+'<br>마감 '+esc((it.bidEndAt||'—').slice(0,16))+'</p><a href="'+esc(it.url)+'" target=_blank rel=noopener style="font-size:13.5px">공고 원문 ↗</a></div>';
+  }).join('');
+  out.innerHTML='<p class=sub>'+hits.length+'건 중 상위 30건 (마감 임박순)</p>'+rows;
+}
+['input','change'].forEach(function(ev){[kw,ag].forEach(function(el){el.addEventListener(ev,render)});document.getElementById('amin').addEventListener(ev,render);document.getElementById('amax').addEventListener(ev,render)});
+document.querySelectorAll('input').forEach(function(el){el.addEventListener('change',render)});
+document.getElementById('clr').addEventListener('click',function(){kw.value='';ag.value='';render();kw.focus()});
+kw.addEventListener('focus',load);
+load();
+})();
+</script>
+</body></html>

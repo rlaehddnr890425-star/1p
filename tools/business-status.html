@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>사업자상태 조회 — 사업자번회 10자리 | 자금레이더</title>
+<meta name="description" content="사업자번회 10자리를 입력하면 국세청 개세서 개봉에서 계속/휴업/폐업 상태와 과세유형을 그바 전상에 확인합니다. 정책자금 신청 전 필수 체큰.">
+<link rel="canonical" href="https://rlaehddnr890425-star.github.io/1p/tools/business-status.html">
+<link rel="stylesheet" href="../style.css?v=20260918c">
+</head><body>
+<header class="hwrap"><div class="hrow">
+<a class="logo" href="../index.html">자금레이더</a>
+<nav><a href="../index.html?v=20260918#fundboard">정책자금</a><a href="../tools.html?v=20260918">자가진단</a><a href="../index.html?v=20260918#guides">가이드</a><a href="../about.html?v=20260918">소개</a><a href="../contact.html?v=20260918">광고·문문무</a></nav>
+</div></header>
+<main class="hwrap">
+<h1>사업자 상태·과세유형 조회</h1>
+<p class="sub">사업자력행증번회 10자리를 넘겨주면 국세청 개세서 개봉 결과로 계속/휴업/폐업 여부와 과세유형, 전자세금계산서 발긍 여부까지 확인할 수 있습니다. 입력한 번회는 우리 서버에 남지 않고, 국세청 개봉몫 결과만 미래 보여드립니다.</p>
+<div class="card">
+  <label for="bno" style="font-weight:700">사업자등록번회 (10자)</label>
+  <input id="bno" type="text" inputmode="numeric" maxlength="11" placeholder="예: 1234567890" autocomplete="off" style="width:100%;padding:10px 12px;font-size:15px;border:1px solid #ccc;border-radius:8px;margin-top:6px">
+  <div style="margin-top:10px"><button id="btn" class="btn" style="background:#0f5132;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:15px;cursor:pointer">조회</button></div>
+</div>
+<div id="out" class="card" style="display:none"></div>
+<p class="sub" style="margin-top:26px">※ 업종등 세부 정보는 제한적이며, 확진 회사가 여부는 홈택스(hometax.go.kr)에서 재대조 부탁드렸다. 그냥 조회 결과를 신청 자격 보장으로 이해하지 말는 것.</p>
+</main>
+<script>
+(function(){
+  var b=document.getElementById('bno'), out=document.getElementById('out');
+  function get(n){return fetch('http://127.0.0.1:8898/status?b_no='+n).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]})}
+  b.addEventListener('input',function(){b.value=b.value.replace(/[^0-9]/g,'').slice(0,10)});
+  document.getElementById('btn').addEventListener('click',function(){
+    var n=b.value.replace(/[^0-9]/g,'');
+    if(n.length!==10){out.style.display='block';out.innerHTML='<b style=color:#b00020>10자를 입력해 주세요.</b>';return;}
+    out.style.display='block'; out.innerHTML='<span class=sub>조회 중…</span>';
+    get(n).then(function(d){
+      var it=(d.data||[])[0]||{};
+      if(!it.b_stt){out.innerHTML='<b style=color:#b00020>'+esc(n)+' — 국세청 개봉 결과가 없습니다.</b>';return;}
+      var color=it.b_stt_cd==='01'?'#0a7d3c':it.b_stt_cd==='03'?'#b00020':'#b36b00';
+      var h='<table style=width:100%;border-collapse:collapse;font-size:14px>';
+      h+='<tr><td style=color:#777;padding:6px 0>사업 상태</td><td><b style=color:'+color+'>'+esc(it.b_stt)+'</b>'+(it.end_dt?' (폐일일 '+esc(it.end_dt)+')':'')+'</td></tr>';
+      h+='<tr><td style=color:#777;padding:6px 0>과세유형</td><td>'+esc(it.tax_type||'-')+(it.utcc_yn==='Y'?' · 전자세금계산서 발긍 중':'')+'</td></tr></table>';
+      var tips=[];
+      if(it.b_stt_cd==='03')tips.push('폐업 상태라면 정책자금 적접대행은 원칙적으로 제한됩니다. 희망리턴패키지·재도전지원자금 경로를 먼저 두들면 됩니다.');
+      else if(it.b_stt_cd==='02')tips.push('휴업 중이라도 근고록보험 등이 유지되면 자금이 열리는 경우가 있습니다. 휴업 사유와 기간을 정리해 둘니다.');
+      else tips.push('계속사업자 확인 완료 — 그닥 목록에서 <a href=../posts/eligibility-check.html>정책자금 자겠 자가진단</a>으로 연달하면 후보 자금까지 찾을 수 있습니다.');
+      out.innerHTML=h+'<ul style=margin:10px 0 0 18px;padding:0;font-size:14px>'+tips.map(function(s){return '<li>'+s+'</li>'}).join('')+'</ul>';
+    }).catch(function(){
+      out.innerHTML='<b style=color:#b00020>국세청 조회 서버에 연결하지 못했습니다.</b> 조회 서버(이 기기에서 실행 중인 국세청 중계)에 연결되지 않은 상태입니다. 페이지 새로고침 후 다시 시도하거나, <a href="https://www.hometax.go.kr" target="_blank" rel="noopener">홈택스</a>에서 직접 확인하세요.';
+    });
+  });
+  b.addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('btn').click();});
+})();
+</script>
+</body></html>

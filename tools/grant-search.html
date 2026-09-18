@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>지원사업 접수 마감 임박 조회 — 중소벤처기업부 | 자금레이더</title>
+<meta name="description" content="중소벤처기업부가 최근 30일 올린 지원사업 공고 중 지금 접수 중인 사업을 마감일 빠른 순으로 보여줍니다. 사업명으로도 검색할 수 있습니다.">
+<link rel="canonical" href="https://rlaehddnr890425-star.github.io/1p/tools/grant-search.html">
+<link rel="stylesheet" href="../style.css?v=20260918c">
+</head><body>
+<header class="hwrap"><div class="hrow">
+<a class="logo" href="../index.html">자금레이더</a>
+<nav><a href="../index.html?v=20260918#fundboard">정책자금</a><a href="../tools.html?v=20260918">자가진단</a><a href="../index.html?v=20260918#guides">가이드</a><a href="../about.html?v=20260918">소개</a><a href="../contact.html?v=20260918">광고·문의</a></nav>
+</div></header>
+<main class="hwrap">
+<h1>지원사업 접수 마감 임박</h1>
+<p class="sub" id="cnt">중소벤처기업부 공고 중 오늘 접수 가능한 사업입니다. 마감일까지 남은 날짜가 짧은 순으로 정렬되며, 사업명을 입력하면 그 안에서 검색합니다. 중기부 외 부처(국토부·문체부 등) 사업은 여는마당(bizinfo.go.kr)에서 확인하세요.</p>
+<div class="card">
+  <input id="q" type="text" placeholder="사업명 키워드 — 예: 스마트공장, 수출, 바우처" autocomplete="off" style="width:100%;padding:10px 12px;font-size:15px;border:1px solid #ccc;border-radius:8px">
+</div>
+<div id="out" style="margin-top:14px"></div>
+<p class="sub" style="margin-top:26px">※ 접수 시작 전 공고는 시작일이 비어 있을 수 있습니다. 신청 자격·제외 업종·필수 서류는 각 공고 원문에서 확인하세요. <a href="https://www.sbiz.or.kr/go/main.do" target="_blank" rel="noopener">중소기업 통합지원 플랫폼 바로 가기</a></p>
+</main>
+<script>
+(function(){
+var data=null,out=document.getElementById('out'),q=document.getElementById('q');
+function load(){if(data)return Promise.resolve();return fetch('../data/mssbiz.json').then(function(r){return r.json()}).then(function(d){data=d.items||[];document.getElementById('cnt').textContent='중기부 최근 30일 공고 중 지금 접수 가능한 '+data.length+'건('+(d.collected||'')+' 수집)입니다. 사업명을 입력하면 검색합니다.';render();});}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]})}
+function dleft(end){if(!end)return '';var t=new Date();var e=new Date(end+'T00:00:00');var days=Math.ceil((e-new Date(t.getFullYear(),t.getMonth(),t.getDate()))/864e5);return days===0?'<span class="tag bad">오늘 마감</span>':days<=7?'<span class="tag warn" style="background:#fde8c8;color:#b36b00">D-'+days+'</span>':'D-'+days}
+function render(){
+  var k=q.value.trim().toLowerCase();
+  var hits=(data||[]).filter(function(it){return !k||(it.title+' '+it.desc).toLowerCase().indexOf(k)>=0});
+  if(!hits.length){out.innerHTML='<div class=card>해당 키워드의 접수 중 공고가 없습니다. <b>'+esc(q.value)+'</b> 외에 다른 표현(예: 바우처 → 지원사업)으로도 검색해 보세요.</div>';return}
+  out.innerHTML=hits.map(function(it){
+    return '<div class=card><b>'+esc(it.title)+'</b> '+(it.end?dleft(it.end):'<span class=tag>상시</span>')+'<p class=sub style=margin:6px 0>'+(it.start?esc(it.start)+' ~ ':'')+(it.end?esc(it.end):'')+(it.dept?' · '+esc(it.dept):'')+'</p>'+(it.desc?'<p style=font-size:13.5px;color:#555>'+esc(it.desc)+'…</p>':'')+'<a href="'+esc(it.url)+'" target=_blank rel=noopener style="font-size:13.5px">공고 원문 ↗</a></div>';
+  }).join('');
+}
+q.addEventListener('input',render);
+load();
+})();
+</script>
+</body></html>
