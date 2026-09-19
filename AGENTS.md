@@ -26,8 +26,11 @@
 ## 배포 반영 확인 — 터미널 대기 금지 (2026-09-19 실측 사고)
 push 후 라이브 반영을 기다릴 때 `sleep`으로 터미널을 블로킹하지 않는다. `sleep 300` + 라인 grep(`sed -n '4p;27p'`)을 **118회(약 9.8시간)** 반복한 사고가 있었다 — 그 변경은 **미커밋이라 배포가 트리거되지 않았고**, 확인한 줄도 수정 대상 줄이 아니었다. 그래서 기다려도 바뀔 수 없었다.
 - 확인은 `python3 ~/Orca-P-Mac/p1/work/blog/ops/verify_deploy.py` **1회**로 끝내고 **종료코드**로 판정한다: `0 IN_SYNC` / `1 PENDING` / `2 NOT_DEPLOYED` / `3 MISMATCH`.
+- **이 규칙은 파이프라인 무관이다.** 블로그 발행뿐 아니라 `tools/business-status.html` 같은 도구 페이지도 `--file tools/business-status.html` 하나로 같은 판정을 한다: `python3 ops/verify_deploy.py --file tools/business-status.html` **1회**. 파일을 지정하지 않으면 HEAD 커밋이 바꾼 파일을 전부 검사한다.
 - **`2 NOT_DEPLOYED`면 기다리지 않는다** — 커밋·푸시가 먼저다(푸시는 사용자 승인). `1 PENDING`이면 `--wait 120` 1회만.
 - 반영 비교는 라인 번호 grep이 아니라 **파일 전체 해시**로 한다.
+- **`raw.githubusercontent.com`은 푸시 즉시 반영된다**(CDN·빌드 대기 없음). 그것을 폴링해도 옛 내용이면 지연이 아니라 **푸시가 안 된 증거**다. 빌드를 기다리는 것은 `github.io`(Pages)뿐이다.
+- **2026-09-19 재발 사례**: 위 문단을 "블로그 발행" 절차에만 적어 둔 탓에, 사업자상태 도구에서 `sleep 120; curl raw.githubusercontent.com/…/business-status.html | sed -n '4p;27p'`를 **127회** 반복했다. 금지는 파이프라인이 아니라 **행동**에 걸린다 — 어떤 파일이든 `sleep` 폴링은 금지다.
 - **같은 확인 명령 2회 = 즉시 중단하고 "무엇이 안 되는지"만 보고한다.**
 
 ## 애드센스 관련 오해 금지
